@@ -1,0 +1,78 @@
+.boxSidebar
+  a:hover
+    color: #0082da
+    text-decoration: none
+.boxSidebar__item
+  border-top: 4px solid #0299FF
+  background: $colorWhite
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25)
+  padding: 30px 40px
+  margin-bottom: 40px
+.boxSidebar__item__headline
+  font-size: 2rem
+  font-weight: 800
+  text-transform: uppercase
+.boxSidebar__weatherWidget
+  margin-top: 46px
+  color: $colorWhite
+  text-align: center
+  padding: 200px 10px 20px 10px
+  border-top: none
+  background-position: center center
+  background-repeat: no-repeat
+  background-size: cover
+.boxSidebar__temperature
+  font-size: 8rem
+  font-weight: 300
+  margin-bottom: 30px
+  display: block
+.boxSidebar__city
+  font-size: 4rem
+  font-weight: 300
+  color: $colorWhite
+.boxSidebar__desc
+  font-size: 2rem
+  color: $colorWhite
+
+.boxSidebar__mostRead
+  counter-reset: number
+  ul
+    list-style: none
+.boxSidebar__mostReadItem
+  position: relative
+  margin-bottom: 20px
+.boxSidebar__item__headline
+  margin-top: 0px
+  margin-bottom: 20px
+.boxSidebar__mostReadItem:before
+  font-family: Georgia, "Times New Roman"
+  font-style: italic
+  font-size: 4rem
+  color: #eee
+  position: absolute
+  left: -40px
+  counter-increment: number
+  content: counter(number)
+
+.boxSidebar__editorsPicks
+    ul
+      list-style: none
+.boxSidebar__editorsPicksItem
+  position: relative
+  margin-bottom: 20px
+.boxSidebar__editorsPicks__headline
+  display: block
+
+.boxSidebar__editorsPicks__info
+  font-size: 1.4rem
+  font-weight: 300
+  color: #666666
+  margin-right: 20px
+
+.boxSidebar__editorsPicksItem:before
+  font-size: 2rem
+  color: #007FFF
+  position: absolute
+  left: -40px
+  content: "»"
+  display: block

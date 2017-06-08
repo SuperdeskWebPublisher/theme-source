@@ -1,0 +1,134 @@
+.sidebar
+  position: fixed
+  top: 0px
+  bottom: 0px
+  width: 70px
+  color: $colorWhite
+  background: #222222
+  overflow: hidden
+  z-index: 1
+  transition: width 0.2s
+  +sm
+    width: 300px
+  +lg
+    width: 335px
+  &.open
+    width: 300px
+    .sidebar__nav__item a
+      color: $colorWhite
+      transition-delay: 0.3s
+    .button--personalize
+      opacity: 1
+      transition-delay: 0.3s
+    .sidebar__user
+  a
+    color: $colorWhite
+    white-space: nowrap
+    +sm
+      color: $colorWhite
+      white-space: initial
+
+#sidebar__menu
+  position: absolute
+  top: 20px
+  visibility: visible
+  zoom: 0.5
+  left: 35px
+  +sm
+    visibility: hidden
+
+.sidebar__logo
+  width: 180px
+  display: block
+  margin: 50px auto 80px auto
+
+.sidebar__logo__small
+  width: 50px
+  display: block
+  margin: 60px auto 40px
+
+.sidebar__nav
+  margin: 0px
+  position: absolute
+  top: 220px
+  bottom: 70px
+  left: 0px
+  right: 0px
+  overflow: auto
+  overflow-y: auto
+  overflow-x: hidden
+  +sm
+    top: 280px
+  ul
+    color: #BBBBBB
+    margin: 0 50px
+    padding-left: 0px
+
+.sidebar__nav__item
+  font-size: 20px
+  font-weight: 800
+  margin: 30px 0px
+  a
+    color: #222
+    +sm
+      color: $colorWhite
+
+.sidebar__user
+  position: absolute
+  height: 70px
+  right: auto
+  left: 0px
+  bottom: 0px
+  +sm
+    right: 0px
+
+.sidebar__user__info
+  background: #333333
+  float: left
+  width: calc(100% - 70px)
+  &:hover
+    background: #414141
+    text-decoration: none
+
+.sidebar__user__avatar
+  float: left
+
+.sidebar__user__name, .sidebar__user__type
+  display: block
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+  margin-left: 90px
+
+.sidebar__user__name
+  margin-top: 10px
+
+.sidebar__user__type
+  font-weight: 300
+  color: #999999
+
+.sidebar__user__type
+
+.sidebar__readLater
+  float: right
+  width: 70px
+  height: 70px
+  background: #111 url(../img/read_later.svg) no-repeat center center
+  background-size: 20px
+  &:hover
+    background-color: #1B1B1B
+    .sidebar__readLaterNumber
+      background: #00B5F0
+
+.sidebar__readLaterNumber
+  font-size: 1.2rem
+  display: block
+  text-align: center
+  width: 20px
+  height: 20px
+  line-height: 20px
+  background: #00A3D9
+  border-radius: 50%
+  position: absolute
+  top: 11px
+  right: 14px

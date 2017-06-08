@@ -1,0 +1,46 @@
+=transitions($params)
+  @if length($params) < 2
+    $params: all .3s
+
+  -webkit-transition: $params
+  -moz-transition: $params
+  -ms-transition: $params
+  -o-transition: $params
+  transition: $params
+
+.text
+  &--italic
+    font-style: italic
+  &--light
+    font-weight: 300
+  &--bold
+    font-weight: 600
+  &--uppercase
+    text-transform: uppercase
+  &--center
+    text-align: center
+  &--smaller
+    font-size: 1.6rem
+
+.twoColumns
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+.twoColumns__item
+  flex: 0 0 calc(100% - 20px)
+  max-width: calc(100% - 20px)
+  +lg
+    flex: 0 0 calc(50% - 20px)
+    max-width: calc(50% - 20px)
+
+.centerBoth
+  display: flex
+  justify-content: center
+  align-items: center
+
+.contentPush
+  padding-left: 85px
+  +sm
+    padding-left: 340px
+  +lg
+    padding-left: 375px

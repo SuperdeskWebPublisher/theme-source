@@ -1,0 +1,48 @@
+.tabs
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25)
+  .nav-tabs
+    display: flex
+    background: #E6E6E6
+    li
+      &:hover
+        border-top: 4px solid #eeeeee
+    a
+      font-size: 2rem
+      font-weight: 800
+      text-transform: uppercase
+      margin: 0px
+      border: none !important
+      border-radius: 0px
+    li.active
+      border-top: 4px solid #0080FF
+      a
+        color: #0080FF
+.nav-tabs > li
+  flex: 1 1 100%
+  text-align: center
+  border-top: 4px solid #E6E6E6
+.tab-content
+  clear: both
+  background: $colorWhite
+  padding: 50px 40px
+
+.form-control
+  font-size: 1.6rem
+  line-height: 160%
+  padding: 6px 10px
+  border: 2px solid #ECECEC
+  box-shadow: none
+  border-radius: 0px
+  height: auto
+  &:focus
+    box-shadow: none
+
+.radio, .checkbox
+  margin-bottom: 15px
+
+.help-block
+  font-size: 1.4rem
+  font-style: italic
+
+.btn
+  border: none

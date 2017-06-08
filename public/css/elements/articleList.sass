@@ -1,0 +1,139 @@
+.articleList
+
+.articleList__listSection
+  display: flex
+  flex-direction: column
+
+.articleList__sectionHeadline
+  font-size: 2.4rem
+  font-weight: 800
+  margin-top: 50px
+  margin-bottom: 20px
+  text-transform: uppercase
+  &:first-child
+    margin-top: 0px
+
+.articleList__item
+  background: $colorWhite
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25)
+  margin-bottom: 20px
+  &:hover
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25)
+    .articleList__headline
+      color: #0299FF
+    a
+      color: $colorDark
+      text-decoration: none
+  a
+    display: flex
+    flex-direction: column
+    position: relative
+    +sm
+      flex-direction: row
+.articleList__image
+  flex-grow: 1
+  flex-shrink: 0
+  flex-basis: 120px
+  order: 0
+  +sm
+    order: 1
+  +lg
+    flex-basis: auto
+    order: 0
+  img
+    width: 100%
+.articleList__info
+  position: relative
+  margin: 30px 40px 0px 40px
+.articleList__headline
+  font-size: 2rem
+  font-weight: 700
+  color: #222
+  transition: all 0.2s
+  margin-top: 0px
+  @media (min-width: 1400px)
+    font-size: 2.4rem
+.articleList__text
+  font-size: 1.6rem
+  color: #666666
+  overflow: hidden
+  margin-bottom: 0px
+  +lg
+    height: 100px
+.articleList__metadata
+  padding-top: 4px
+  padding-bottom: 10px
+  display: flex
+  align-items: center
+  @media (min-width: 1400px)
+  	padding-top: 14px
+  +lg
+    position: absolute
+    left: 0px
+    right: 0px
+    bottom: 0px
+    background: $colorWhite
+  > *:first-child
+    margin-left: 0px
+.articleList__metadata__logo
+  height: 50px
+.articleList__metadata__item
+  font-size: 1.4rem
+  color: #666666
+  font-weight: 300
+  margin: 0px 10px
+  +lg
+    margin: 0px 20px
+  @media (min-width: 1600px)
+    margin: 0px 40px
+
+.articleList__metadata__item--readLater
+  background: url(../img/read_later_grey.svg) no-repeat left center
+  padding-left: 0px
+  overflow: hidden
+  text-indent: -999px
+  &:hover
+    color: #0082da
+  @media (min-width: 1600px)
+    padding-left: 30px
+    text-indent: initial
+
+.articleList__listSection--gridView
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: space-between
+  .articleList__item
+    flex: 0 1 calc(100%)
+    margin-bottom: 40px
+    +sm
+      flex: 0 1 calc(50% - 20px)
+      max-width: calc(50% - 20px)
+    +lg
+      flex: 0 1 calc(33% - 20px)
+      max-width: calc(33% - 20px)
+    a
+      flex-direction: column
+      height: 100%
+  .articleList__image
+    flex-grow: 0
+    flex-shrink: 1
+    order: 0
+  .articleList__info
+    position: initial
+  .articleList__text
+    height: auto
+    padding-bottom: 100px
+  .articleList__metadata
+    position: absolute
+    left: 40px
+    right: 40px
+    bottom: 0px
+  .articleList__metadata__item
+    margin: 0px 10px
+    vertical-align: middle
+  .articleList__metadata__item--readLater
+    display: inline-block
+    text-indent: -999px
+    padding-left: 0px
+    overflow: hidden
