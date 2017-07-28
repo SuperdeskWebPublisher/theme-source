@@ -1,0 +1,36 @@
+{% extends 'knp_menu_base.html.twig' %}
+{% set response = [] %} 
+
+{% block compressed_root %}
+     {% spaceless %}
+        {{ block('root') }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block root %}
+    {% spaceless %}
+    {% set listAttributes = item.childrenAttributes %}
+    {{ block('list') -}}
+    {% endspaceless %}
+{% endblock %}
+{% block list %}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        {% import _self as knp_menu %}
+            {{ block('children') }}
+    {% endif %}
+{% endblock %}
+{% block children %}
+    {# save current variables #}
+    {% set currentOptions = options %}
+    {% set currentItem = item %}
+    {% for item in currentItem.children %}
+      {% if item.displayed %}
+        {% set response =  response|merge([{title: item.label, url: item.uri, id: item.route.id, type: item.route.type}])  %} 
+      {% endif %}
+    {% endfor %}
+    {# restore current variables #}
+    {% set item = currentItem %}
+    {% set options = currentOptions %}
+
+    {{ response|json_encode()|raw }}
+{% endblock %}

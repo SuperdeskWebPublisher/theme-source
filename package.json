@@ -8,16 +8,15 @@
     "gulp-cssmin": "*",
     "gulp-import-css": "*",
     "gulp-inject": "*",
-    "gulp-replace": "*",
     "gulp-sass": "*",
     "gulp-sourcemaps": "*",
     "gulp-uglify": "*",
     "gulp-watch": "*",
     "node-sass": "*",
     "sw-precache": "*",
-    "sw-toolbox": "*"
+    "sw-toolbox": "*",
+    "gulp-util": "^3.0.8"
   },
   "dependencies": {
-
   }
 }

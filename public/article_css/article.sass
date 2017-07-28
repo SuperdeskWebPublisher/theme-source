@@ -1,0 +1,39 @@
+@import "../css/vendor/bootstrap.css";
+@import "../css/elements/_breakpoints.sass";
+@import "../css/elements/_default.sass";
+@import "../css/elements/_helpers.sass";
+@import "../css/elements/boxSidebar.sass";
+@import "../css/elements/bt-menu.sass";
+@import "../css/elements/sidebar.sass";
+@import "../css/elements/topBar.sass";
+
+.article
+  &__image
+    display: block
+    position: fixed
+    top: 0 
+    left: 0
+    right: 0
+    max-height: 50vh
+    text-align: center
+    
+  &__wrapper
+    display: block
+    background-color: #fff
+    padding: 2rem 3rem
+    position: relative
+  &__header
+    h1
+      margin-top: 0
+      margin-bottom: 2rem
+      word-break: break-word
+    time
+      color: #666
+
+  &__body
+    padding-top: 2rem
+    font-size: 1.8rem
+    line-height: 1.8
+
+.contentPush
+  margin-top: 40vh

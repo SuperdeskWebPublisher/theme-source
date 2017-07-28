@@ -1,0 +1,5 @@
+{% set response = [] %} 
+{% gimmelist item from contentListItems with { contentListName: "editorsPicks" } %}
+    {% set response =  response|merge([{title: item.content.title, url: url(item.content), source: item.content.source, date: item.content.publishedAt.date}])  %} 
+{% endgimmelist %}
+{{ response|json_encode()|raw }}

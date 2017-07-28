@@ -1,11 +1,15 @@
-# Publisher theme starter (gulp + service worker precache)
-1. install node.js
-2. install npm
-3. install gulp globally if U haven't already - 'npm install --global gulp-cli'
-4. run 'npm install' in project folder
+# Publisher theme The Source
+- create "/contentapi.json" route and attach api.html.twig template
+- create content lists named "mostRead", "editorsPicks" and "topNews"
+- create menu named "mainNavigation"
+- create proper image crop sizes (in superdesk vacabularies): "300x220", "1100x500", "600x360"
+ 
+# Setting up for development
+- run "npm install" in root folder and in /app folder
+- run "gulp watch" in theme root folder to edit global styles as well as js for server side rendered article template
+- set remote host in app/variables.js. Run "npm run dev" in /app folder. It will create a server and open your browser automatically
 
-
-
-there are two main tasks:
-- gulp watch (watches for changes in sass/js files and bundles them to dist folder)
-- gulp build (bundles assets and generates service worker file)
+# Building theme and vue.js app
+- run "gulp build" in theme root folder 
+- reset host in app/variables.js to "". Run "npm run build" in /app folder
+- run "gulp sw" to generate service worker

@@ -1,5 +1,5 @@
 .articleList
-
+  min-height: 100vh
 .articleList__listSection
   display: flex
   flex-direction: column
@@ -24,7 +24,7 @@
     a
       color: $colorDark
       text-decoration: none
-  a
+  a, &__content
     display: flex
     flex-direction: column
     position: relative
@@ -40,17 +40,23 @@
   +lg
     flex-basis: auto
     order: 0
+    max-width: 40%
+    display: flex;
+    align-items: center;
   img
     width: 100%
 .articleList__info
   position: relative
-  margin: 30px 40px 0px 40px
+  margin: 20px 30px 0px 40px
+  &--bottomMargin
+    margin-bottom: 20px
 .articleList__headline
   font-size: 2rem
   font-weight: 700
   color: #222
   transition: all 0.2s
   margin-top: 0px
+  word-wrap: break-word
   @media (min-width: 1400px)
     font-size: 2.4rem
 .articleList__text
@@ -58,8 +64,6 @@
   color: #666666
   overflow: hidden
   margin-bottom: 0px
-  +lg
-    height: 100px
 .articleList__metadata
   padding-top: 4px
   padding-bottom: 10px
@@ -67,12 +71,6 @@
   align-items: center
   @media (min-width: 1400px)
   	padding-top: 14px
-  +lg
-    position: absolute
-    left: 0px
-    right: 0px
-    bottom: 0px
-    background: $colorWhite
   > *:first-child
     margin-left: 0px
 .articleList__metadata__logo
@@ -92,8 +90,11 @@
   padding-left: 0px
   overflow: hidden
   text-indent: -999px
-  &:hover
+  &--active
     color: #0082da
+    background-image: url(../img/read_later_blue.svg)
+  &--offline
+    cursor: no-drop
   @media (min-width: 1600px)
     padding-left: 30px
     text-indent: initial
@@ -109,7 +110,7 @@
     +sm
       flex: 0 1 calc(50% - 20px)
       max-width: calc(50% - 20px)
-    +lg
+    +xlg
       flex: 0 1 calc(33% - 20px)
       max-width: calc(33% - 20px)
     a
@@ -119,18 +120,14 @@
     flex-grow: 0
     flex-shrink: 1
     order: 0
+    +lg
+      max-width: 100%
   .articleList__info
     position: initial
   .articleList__text
     height: auto
-    padding-bottom: 100px
-  .articleList__metadata
-    position: absolute
-    left: 40px
-    right: 40px
-    bottom: 0px
   .articleList__metadata__item
-    margin: 0px 10px
+    margin-right: 10px
     vertical-align: middle
   .articleList__metadata__item--readLater
     display: inline-block

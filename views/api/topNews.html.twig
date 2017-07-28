@@ -1,0 +1,17 @@
+{% set response = [] %} 
+{% set rend = null %} 
+{% gimmelist item from contentListItems with { contentListName: "topNews" } %}
+  {% if item.content.featureMedia %}
+    {% gimme rendition with { 'media': item.content.featureMedia, 'name': '300x220' } %}
+      {% set rend = rendition %}
+    {% endgimme %}
+  {% else %}
+    {% gimmelist media from articleMedia|limit(1) with {'article': item.content} %}
+      {% gimme rendition with { media: item.content.media, 'name': '300x220' } %}
+        {% set rend = rendition %}
+      {% endgimme %}
+    {% endgimmelist %}
+  {% endif %}
+  {% set response =  response|merge([{id: item.content.id, title: item.content.title, url: url(item.content), date: item.content.publishedAt.date, lead: item.content.lead|striptags|truncate(120,true), source: item.content.source, image: url(rend)}])  %}
+{% endgimmelist %}
+{{ response|json_encode()|raw }}

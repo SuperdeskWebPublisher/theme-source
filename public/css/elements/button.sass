@@ -1,24 +1,35 @@
 .button
-  font-size: 1.8rem
+  font-size: 1.4rem
+  line-height: 3em;
   color: $colorWhite
   text-transform: uppercase
-  padding: 10px 15px
+  padding: 0 15px
   border-radius: 2px
   background: #0080FF
+  &[disabled]
+    opacity: .3
   &:hover
     color: $colorWhite
     background: #1A8CFF
     text-decoration: none
-
-.button--personalize
-  display: inline-block
-  margin-left: 30px
-  margin-bottom: 10px
-  opacity: 0
-  +sm
-    opacity: 1
-
-.button--grey
-  background: #888888
-  &:hover
-    background: #999999
+  @media (min-width: 1480px)
+    font-size: 1.6rem
+  &--small
+    font-size: 1.2rem
+    line-height: 2.5em
+    @media (min-width: 1480px)
+      font-size: 1.4rem
+  &--grey
+    background: #888888
+    &:hover
+      background: #999999
+  &--personalize
+    display: inline-block
+    margin-top: 80px
+    margin-left: 30px
+    margin-bottom: 10px
+    opacity: 0
+    +sm
+      margin-top: 0px
+      opacity: 1
+  

@@ -1,0 +1,17 @@
+{% spaceless %}
+{% if app.request.query.get("type") == 'topNews' %}
+   {% include 'api/topNews.html.twig' %}
+{% endif %}
+{% if app.request.query.get("type") == 'mostRead' %}
+   {% include 'api/mostRead.html.twig' %}
+{% endif %}
+{% if app.request.query.get("type") == 'editorsPicks' %}
+   {% include 'api/editorsPicks.html.twig' %}
+{% endif %}
+{% if app.request.query.get("type") == 'menu' %}
+   {% include 'api/menu.html.twig' %}
+{% endif %}
+{% if app.request.query.get("type") == 'route' %}
+   {% include 'api/route.html.twig' %}
+{% endif %}
+{% endspaceless %}

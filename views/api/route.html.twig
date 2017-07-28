@@ -1,0 +1,21 @@
+{% set route =  app.request.query.get("route") %}
+{% set response = [] %} 
+{% set itemsPerPage = app.request.get('limit', 1) %}
+{% set currentPage = app.request.get('page', 1) %}
+{% set start = (itemsPerPage * currentPage) - itemsPerPage %}
+{% set rend = '' %}
+{% gimmelist article from articles|start(start)|limit(itemsPerPage)|order('publishedAt','desc') with {'route': route} %}
+  {% if article.featureMedia %}
+    {% gimme rendition with { 'media': article.featureMedia, 'name': '300x220' } %}
+      {% set rend = rendition %}
+    {% endgimme %}
+  {% else %}
+    {% gimmelist media from articleMedia|limit(1) with {'article': article} %}
+      {% gimme rendition with { media: media, 'name': '300x220' } %}
+        {% set rend = rendition %}
+      {% endgimme %}
+    {% endgimmelist %}
+  {% endif %}
+  {% set response =  response|merge([{id: article.id, title: article.title, url: url(article), date: article.publishedAt.date, lead: article.lead|striptags|truncate(120,true), source: article.source, image: url(rend)}])  %}
+{% endgimmelist %}
+{{ response|json_encode()|raw }}
