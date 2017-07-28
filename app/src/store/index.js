@@ -97,17 +97,16 @@ const store = new Vuex.Store({
     loadMenuItems: (context) => {
       return axios.get(variables.host + '/contentapi.json?type=menu')
         .then((response) => {
-          context.commit('setMenuItems', response.data)
-
           let frontpageSections = []
           _.each(response.data, function (item) {
+            if (!item.hasOwnProperty('score')) {
+              item.score = 5
+            }
             if (item.type === 'collection') {
-              if (!item.hasOwnProperty('score')) {
-                item.score = 5
-              }
               frontpageSections.push(item)
             }
           })
+          context.commit('setMenuItems', response.data)
           context.commit('setFrontpageSections', frontpageSections)
           return
         })
@@ -147,7 +146,7 @@ const store = new Vuex.Store({
         let oriSections = JSON.parse(JSON.stringify(context.getters.getFrontpageSections))
         let merged = []
         // ----------- sections -----------
-        // if oriSections (menu items) is same size or longer than config
+        // if oriSections is same size or longer than config
         // nothing changed or element was added so we update oriSections with config values
         if (oriSections.length >= config.sections.length) {
           merged = _.unionBy(config.sections, oriSections, 'id')
@@ -156,6 +155,7 @@ const store = new Vuex.Store({
           merged = _.intersectionBy(config.sections, oriSections, 'id')
         }
         context.commit('setFrontpageSections', merged)
+        context.dispatch('updateMenuWithFilters', merged)
 
         // ----------- sources -------------
         let oriSources = JSON.parse(JSON.stringify(context.getters.getSources))
@@ -183,6 +183,7 @@ const store = new Vuex.Store({
           value: JSON.stringify(payload)
         }
       }
+      context.dispatch('updateMenuWithFilters', payload.sections)
       context.commit('setFrontpageSections', payload.sections)
       context.commit('setSources', payload.sources)
       axios({
@@ -195,6 +196,11 @@ const store = new Vuex.Store({
         context.commit('setLoginModalOpen', true)
         throw error
       })
+    },
+    updateMenuWithFilters: (context, payload) => {
+      let oriMenu = JSON.parse(JSON.stringify(context.getters.getMenuItems))
+      let merged = _.unionBy(payload, oriMenu, 'title')
+      context.commit('setMenuItems', merged)
     },
     saveReadingList: (context, payload) => {
       let settingsObj = {
