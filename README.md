@@ -7,7 +7,7 @@
 # Setting up for development
 - run "npm install" in root folder and in /app folder
 - run "gulp watch" in theme root folder to edit global styles as well as js for server side rendered article template
-- set remote host in app/variables.js. Run "npm run dev" in /app folder. It will create a server and open your browser automatically
+- set remote host in app/variables.js. Run "npm install" and then "npm run dev" in /app folder. It will create a server and open your browser automatically
 
 # Building theme and vue.js app
 - run "gulp build" in theme root folder 
