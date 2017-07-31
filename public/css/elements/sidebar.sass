@@ -10,6 +10,10 @@
   transition: width 0.2s
   +sm
     display: block
+    width: 250px
+  +lg
+    width: 280px
+  @media (min-width: 1480px)
     width: 300px
 
   &.open
@@ -17,6 +21,7 @@
     width: 100%
     left: 0px
     right: 0px
+    z-index: 3
     .sidebar__nav li a
       color: $colorWhite
       transition-delay: 0.3s
@@ -41,9 +46,11 @@
     visibility: hidden
 
 .sidebar__logo
-  width: 180px
+  width: 160px
   display: block
   margin: 50px auto
+  @media (min-width: 1480px)
+    width: 180px
 
 .sidebar__logo__small
   width: 50px
@@ -64,7 +71,7 @@
     top: 260px
   ul
     color: #BBBBBB
-    margin: 0 30px
+    margin: 0 45px
     padding-left: 0px
     @media (min-width: 1480px)
       margin: 0 50px
@@ -73,11 +80,15 @@
   font-size: 16px
   font-weight: 800
   margin: 15px 0px
+  padding-left: 5px
   @media (min-width: 1480px)
     font-size: 20px
     margin: 30px 0px
   a
     color: #222
+    text-transform: uppercase
+    &:hover
+      text-decoration: none
     +sm
       color: $colorWhite
 
