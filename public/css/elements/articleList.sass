@@ -1,5 +1,7 @@
 .articleList
   min-height: 100vh
+  > div:first-child .articleList__sectionHeadline
+    margin-top: 0px
 .articleList__listSection
   display: flex
   flex-direction: column
@@ -7,20 +9,21 @@
 .articleList__sectionHeadline
   font-size: 2.4rem
   font-weight: 800
-  margin-top: 50px
+  margin-top: 30px
   margin-bottom: 20px
   text-transform: uppercase
-  &:first-child
-    margin-top: 0px
+  +lg
+    margin-top: 40px
+    margin-bottom: 30px
 
 .articleList__item
   background: $colorWhite
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25)
   margin-bottom: 20px
   &:hover
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25)
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25)
     .articleList__headline
-      color: #0299FF
+      color: #158bdc
     a
       color: $colorDark
       text-decoration: none
@@ -33,43 +36,61 @@
 .articleList__image
   flex-grow: 1
   flex-shrink: 0
-  flex-basis: 120px
+  flex-basis: auto
+  max-width: 100%
   order: 0
   +sm
-    order: 1
-  +lg
-    flex-basis: auto
-    order: 0
+    flex-basis: 40%
     max-width: 40%
+  +lg
+    order: 0
     display: flex;
-    align-items: center;
+    align-items: center
+  +xlg
+    flex-basis: 300px
+    max-width: 300px
   img
     width: 100%
+    height: 100%
+    object-fit: cover
 .articleList__info
   position: relative
-  margin: 20px 30px 0px 40px
+  margin: 20px 30px 10px 30px
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  @media (min-width: 1480px)
+    margin: 25px 30px 10px 40px
   &--bottomMargin
     margin-bottom: 20px
 .articleList__headline
   font-size: 2rem
   font-weight: 700
   color: #222
+  line-height: 130%
+  text-transform: uppercase
+  flex: 1 1 100%
+  align-self: flex-start
   transition: all 0.2s
   margin-top: 0px
   word-wrap: break-word
-  @media (min-width: 1400px)
-    font-size: 2.4rem
+  @media (min-width: 1480px)
+    font-size: 2.2rem
 .articleList__text
-  font-size: 1.6rem
+  font-size: 1.5rem
   color: #666666
+  align-self: flex-start
   overflow: hidden
   margin-bottom: 0px
+  @media (min-width: 1480px)
+    font-size: 1.6rem
 .articleList__metadata
   padding-top: 4px
   padding-bottom: 10px
   display: flex
   align-items: center
-  @media (min-width: 1400px)
+  align-self: flex-end
+  @media (min-width: 1480px)
   	padding-top: 14px
   > *:first-child
     margin-left: 0px

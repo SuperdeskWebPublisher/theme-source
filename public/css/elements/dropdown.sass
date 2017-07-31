@@ -1,7 +1,7 @@
 .dropdown--wrap
   margin-top: 10px
-  margin-bottom: 10px
   text-align: right
+  z-index: 1
 
 .select-style
   display: inline-block
@@ -9,7 +9,11 @@
   text-align: left
   background-color: #f8f8f8
   position: relative
-  padding: 4px 8px
+  padding: 4px 12px
+  margin-left: 20px
+  margin-bottom: 10px
+  border: 1px solid #CCCCCC
+  border-radius: 2px
   &:after
     content: ''
     right: 10px 
@@ -24,10 +28,12 @@
   
 
   select
+    text-transform: uppercase
+    color: #333
+    font-weight: 600
     padding: 3px
     margin: 0
     background: #f8f8f8
-    color: #333
     border: none
     outline: none
     display: inline-block
