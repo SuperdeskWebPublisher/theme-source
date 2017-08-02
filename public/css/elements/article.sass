@@ -1,24 +1,40 @@
 .article
-  display: flex
   min-height: 100vh
-  flex-wrap: wrap
+  padding-top: 44px
   +sm
     border: 2vw solid #222
-  +md
-    flex-wrap: nowrap
   +lg
+    padding-top: 0
     border-width: 3vw
-  &__side
-    flex-grow: 1
-    padding: 3vw
-    +md
-      max-width: 25vw
-      min-width: 20vw
-  &__wrapper
-    flex-grow: 2
+  &__sidenav
+    position: fixed
+    top: 3vw
+    left: 3vw
     padding: 3vw
     +lg
-      max-width: 50vw
+      max-width: 25vw
+      min-width: 20vw
+  &__topnav
+    background: #222
+    height: 44px
+    position: fixed
+    top: 0
+    transition: top 0.2s ease-in-out
+    width: 100%
+    z-index: 99999
+    +sm
+      margin: 0 -2vw
+    &--hidden
+      top: -44px
+
+  &__wrapper
+    margin: 0 auto
+    padding: 3vw
+    max-width: 900px
+    +lg
+      max-width: 60vw
+    +xlg
+      max-width: 900px
   &__logo
     display: block
     margin-bottom: 2rem 
@@ -30,7 +46,7 @@
         width: 50%
   &__image
     display: block
-    margin: 0 -3vw
+    margin: -3vw -3vw 0 -3vw
     +md
       margin: 0 -1vw
     +lg
@@ -41,4 +57,9 @@
       margin-bottom: 0
     .articleList__metadata
       margin: 20px 0
-  
+  &__body
+    p
+      font-size: 1.8rem
+      line-height: 160%
+    a
+      color: #0080FF

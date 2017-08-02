@@ -5,12 +5,13 @@
   bottom: 70px
   left: 0px
   right: 0px
+  height: 100%
   overflow: auto
   overflow-y: auto
   overflow-x: hidden
   background: #000
   +sm
-    top: 260px
+    top: 280px
   &__nav
     display: flex
     list-style: none
@@ -20,19 +21,27 @@
       flex: 1 1 100%
       text-align: center
       text-transform: uppercase
-      font-size: 1.2rem
+      font-size: 1.4rem
       font-weight: bold
       line-height: 3em
       color: #777
       cursor: pointer
       background: #222
+      border-top: 2px solid transparent
       &:hover
         color: #fff
+      @media (min-width: 1480px)
+        font-size: 1.8rem
 
       &.active
         color: #fff
         background: #000
-        border-top: 1px solid #0080FF
+        border-top: 2px solid #0080FF
 
   &__content
     padding: 20px
+
+  &__buttons
+    margin: 20px 10px 0px 10px
+    button
+      margin-left: 10px

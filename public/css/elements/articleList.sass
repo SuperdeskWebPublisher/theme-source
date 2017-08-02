@@ -79,6 +79,7 @@
 .articleList__text
   font-size: 1.5rem
   color: #666666
+  flex: 1 1 100%
   align-self: flex-start
   overflow: hidden
   margin-bottom: 0px
@@ -90,6 +91,7 @@
   display: flex
   align-items: center
   align-self: flex-end
+  flex: 1 1 100%
   @media (min-width: 1480px)
   	padding-top: 14px
   > *:first-child
@@ -112,7 +114,6 @@
   overflow: hidden
   text-indent: -999px
   &--active
-    color: #0082da
     background-image: url(../img/read_later_blue.svg)
   &--offline
     cursor: no-drop
@@ -125,24 +126,37 @@
   flex-direction: row
   flex-wrap: wrap
   justify-content: space-between
+  margin-left: 0px
+  +sm
+    margin-left: -20px
+  +lg
+    margin-left: -20px
+  +xlg
+    margin-left: -40px
   .articleList__item
-    flex: 0 1 calc(100%)
-    margin-bottom: 40px
+    flex: 1 1 calc(100%)
+    margin-left: 0px
+    margin-bottom: 20px
     +sm
-      flex: 0 1 calc(50% - 20px)
-      max-width: calc(50% - 20px)
-    +xlg
-      flex: 0 1 calc(33% - 20px)
-      max-width: calc(33% - 20px)
-    a
-      flex-direction: column
-      height: 100%
-  .articleList__image
-    flex-grow: 0
-    flex-shrink: 1
-    order: 0
+      margin-left: 20px
+    +md
+      flex: 1 1 calc(50% - 20px)
     +lg
+      flex: 1 1 calc(50% - 20px)
+    +xlg
+      flex: 1 1 calc(33% - 40px)
+      margin-left: 40px
+      margin-bottom: 40px
+    a
+      flex-direction: row
+      flex-wrap: wrap
+  .articleList__image
+    flex-basis: 100%
+    max-width: 100%
+    +lg
+      flex-basis: auto
       max-width: 100%
+      flex: 1 0 auto
   .articleList__info
     position: initial
   .articleList__text

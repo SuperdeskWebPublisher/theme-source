@@ -1,17 +1,48 @@
 {#% cache 'article' {gen: gimme.article} %#}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-  Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
   <title>{{ gimme.article.title }}</title>
-  <meta name="author" content="Sourcefabric">
+  <meta name="description" content="{{ gimme.article.lead|striptags }}">
+  <meta property="og:title" content="{{gimme.article.title}}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{url(gimme.article)}}" />
+  <meta property="og:site_name" content="Superdesk" />
+  <meta property="og:description" content="{{ gimme.article.lead|striptags }}" />
+  <meta property="article:published_time" content="{{ gimme.article.publishedAt|date("%Y-%m-%d %H:%M:%S") }}" />
 
-  <meta name="description" content="Superdesk Web Publisher is state of the art publishing system.">
+  {% set big = '' %}
+  {% set bigURL = '' %}
+  {% set small = '' %}
+  {% set smallURL = '' %}
+
+  {% if gimme.article.featureMedia %}
+    {% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '900x490' } %}
+      {% set big = path(rendition) %}
+      {% set bigURL = url(rendition) %}
+    {% endgimme %}
+    {% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '600x360' } %}
+      {% set small = path(rendition) %}
+      {% set smallURL = url(rendition) %}
+    {% endgimme %}
+  {% endif %}
+
+  
+  {% if bigURL %}
+      <meta property="og:image" content="{{bigURL}}" />
+      <meta property="og:image:height" content="900" />
+      <meta property="og:image:width" content="490" />
+  {% elseif smallURL %}
+    <meta property="og:image" content="{{smallURL}}" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:image:width" content="360" />
+  {% endif %}
+
+
+  <meta itemprop="name" content="{{gimme.article.title}}">
+  <meta name="author" content="Sourcefabric">
   <meta name="keywords" content="Superdesk, Sourcefabric, open source, media, journalism">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,23 +60,15 @@
 
 </head>
 <body class="article">
-  <aside class="article__side">
+  <header class="article__topnav hidden-lg">
+    <a class="button button--back cursorPointer">Back</a>
+  </header>
+  <aside class="article__sidenav visible-lg">
     <a href="/#/" class="article__logo"><img src="/public/img/logo-dark.svg"></a>
     <a class="button button--back cursorPointer">Back</a>
   </aside>
   <article class="article__wrapper">
-    {% set big = '' %}
-    {% set small = '' %}
-
-    {% if gimme.article.featureMedia %}
-
-    {% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '900x490' } %}
-    {% set big = path(rendition) %}
-    {% endgimme %}
-    {% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '600x360' } %}
-    {% set small = path(rendition) %}
-    {% endgimme %}
-    {% endif %}
+    
 
 
     {% if small is not empty %}
@@ -57,9 +80,9 @@
     <header class="article__header">
       <h1>{{ gimme.article.title }}</h1>
       <div class="articleList__metadata">
-      {% if gimme.article.source %}
-        <span class="articleList__metadata__item">{{gimme.article.source}}</span>
-      {% endif %}
+      {% for source in gimme.article.sources %}
+        <span class="articleList__metadata__item">{{source}}</span>
+      {% endfor %}
         <time class="articleList__metadata__item" datetime="{{ gimme.article.publishedAt|date("c") }}" class="">{{ gimme.article.publishedAt|date("d F Y") }}</time>
       </div>
   
@@ -68,9 +91,48 @@
       {{ gimme.article.body|raw }}
     </div>
   </article>
-   <aside class="article__side visible-lg">
-  </aside>
 
+  <div class="articleList article__wrapper">
+    <h2 class="articleList__sectionHeadline">More from {{gimme.article.route.name}}</h2><div class="articleList__listSection articleList__listSection--gridView">
+      {% set counter = 0 %}
+      {% gimmelist article from articles|limit(3)|order('publishedAt','desc') %}
+        {% if (article.id != gimme.article.id) and (counter < 3) %}
+          {% set counter = counter + 1 %}
+          {% set rend = '' %}
+          {% if article.featureMedia %}
+            {% gimme rendition with { 'media': article.featureMedia, 'name': '300x220' } %}
+              {% set rend = rendition %}
+            {% endgimme %}
+          {% else %}
+            {% gimmelist media from articleMedia|limit(1) with {'article': article} %}
+              {% gimme rendition with { media: media, 'name': '300x220' } %}
+                {% set rend = rendition %}
+              {% endgimme %}
+            {% endgimmelist %}
+          {% endif %}
+          <article class="articleList__item">
+            <a href="{{url(article)}}">
+              {% if rend %}
+                <figure class="articleList__image">
+                  <img src="{{url(rend)}}">
+                </figure>
+              {% endif %}
+              <div class="articleList__info">
+                <h3 class="articleList__headline">{{article.title}}</h3>
+                <p class="articleList__text">{{article.lead|striptags|truncate(120,true)}}</p>
+                <div class="articleList__metadata">
+                  {% for source in article.sources %}
+                    <span class="articleList__metadata__item">{{source}}</span>
+                  {% endfor %}
+                  <span class="articleList__metadata__item">{{ article.publishedAt|date("d F Y") }}</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        {% endif %}
+      {% endgimmelist %}
+    </div>
+  </div>
 <script src="/public/dist/all.js" ></script>
 </body>
 </html>
