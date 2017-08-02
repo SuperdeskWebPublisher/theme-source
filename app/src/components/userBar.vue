@@ -3,13 +3,13 @@
 <modal v-show="loginModalOpen" @close="setLoginModalOpen(false)">
   <h3 slot="header">Login</h3>
   <div slot="body">
-    <form @submit="login">
+    <form class="form" @submit="login">
       <p class="text-danger" v-if="loginError">Wrong credentials</p>
-      <div class="form-group">
+      <div class="form__item">
         <label for="username">Username</label>
         <input name="username" v-model="auth.username" type="text" class="form-control" @keyup.enter="login">
       </div>
-      <div class="form-group">
+      <div class="form__item">
         <label for="password">Password</label>
         <input name="password" v-model="auth.password" type="password" class="form-control" @keyup.enter="login">
       </div>

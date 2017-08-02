@@ -149,6 +149,7 @@ button {
 
 .contentPush {
   padding-top: 51px;
+  padding-right: 15px;
   padding-left: 15px; }
   @media (min-width: 768px) {
     .contentPush {
@@ -157,6 +158,9 @@ button {
   @media (min-width: 1480px) {
     .contentPush {
       padding-left: 340px; } }
+  @media (min-width: 1600px) {
+    .contentPush {
+      padding-right: 30px; } }
 
 .cursorPointer {
   cursor: pointer; }
@@ -199,7 +203,7 @@ button {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   margin-bottom: 20px; }
   .articleList__item:hover {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); }
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15); }
     .articleList__item:hover .articleList__headline {
       color: #158bdc; }
     .articleList__item:hover a {
@@ -212,6 +216,14 @@ button {
     @media (min-width: 768px) {
       .articleList__item a, .articleList__item__content {
         flex-direction: row; } }
+  .articleList__item--noHover:hover {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25); }
+    .articleList__item--noHover:hover .articleList__headline {
+      color: inherit; }
+  .articleList__item--noImage a {
+    height: 100%; }
+    .articleList__item--noImage a .articleList__info {
+      align-content: center; }
 
 .articleList__image {
   flex-grow: 1;
@@ -239,13 +251,13 @@ button {
 
 .articleList__info {
   position: relative;
-  margin: 20px 30px 10px 30px;
+  margin: 20px 20px 10px 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap; }
   @media (min-width: 1480px) {
     .articleList__info {
-      margin: 25px 30px 10px 40px; } }
+      margin: 25px 30px 10px 30px; } }
   .articleList__info--bottomMargin {
     margin-bottom: 20px; }
 
@@ -363,6 +375,9 @@ button {
         flex: 1 0 auto; } }
   .articleList__listSection--gridView .articleList__info {
     position: initial; }
+    @media (min-width: 1480px) {
+      .articleList__listSection--gridView .articleList__info {
+        margin: 20px 20px 10px 20px; } }
   .articleList__listSection--gridView .articleList__text {
     height: auto; }
   .articleList__listSection--gridView .articleList__metadata__item {
@@ -426,6 +441,16 @@ button {
 
 .modal-header .close {
   float: right; }
+
+.modal-header {
+  padding: 10px 15px;
+  border-bottom: none; }
+
+.modal-container {
+  overflow: auto; }
+
+.modal-footer {
+  padding: 10px 15px; }
 
 .boxSidebar {
   margin-top: 55px; }
@@ -665,6 +690,9 @@ button {
   margin-top: 10px;
   text-align: right;
   z-index: 1; }
+  @media (min-width: 1600px) {
+    .dropdown--wrap {
+      margin-top: 20px; } }
 
 .select-style {
   display: inline-block;
@@ -705,6 +733,28 @@ button {
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
     .select-style select {
       padding-right: 15px; } }
+
+.form {
+  width: 100%; }
+
+.form__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: 30px; }
+  .form__item label {
+    flex: 1 1 100%;
+    font-weight: 400; }
+    @media (min-width: 768px) {
+      .form__item label {
+        flex: 1 1 25%; } }
+  .form__item input, .form__item textarea {
+    flex: 1 1 100%;
+    font-style: normal;
+    font-weight: 300; }
+    @media (min-width: 768px) {
+      .form__item input, .form__item textarea {
+        flex: 1 1 75%; } }
 
 .sectionsTable {
   width: 100%;

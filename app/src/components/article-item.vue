@@ -1,5 +1,5 @@
 <template>
-<article class="articleList__item">
+<article  v-bind:class="['articleList__item', { 'articleList__item--noImage' : !item.image }]">
   <a v-bind:href="item.url">
     <figure class="articleList__image" v-if="item.image && item.image.length">
       <img v-bind:src="item.image">
