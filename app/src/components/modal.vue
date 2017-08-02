@@ -57,7 +57,6 @@ export default {
   transition: all .3s ease;
   position: relative;
   max-height: 95vh;
-  overflow-y: scroll;
 }
 
 @media screen and (min-width: 800px) {
@@ -78,8 +77,8 @@ export default {
 
 .modal-close {
   position: absolute;
-  top: 5px;
-  right: 12px;
+  top: 15px;
+  right: 20px;
   display: inline-block;
   cursor: pointer;
 }
