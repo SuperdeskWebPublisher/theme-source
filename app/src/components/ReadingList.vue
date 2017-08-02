@@ -1,11 +1,13 @@
 <template>
   <div class="articleList col-lg-8">
-    <h2 class="articleList__sectionHeadline">Reading List</h2>
-    <div v-bind:class="['articleList__listSection', { 'articleList__listSection--gridView' : layout == 'grid' }]">
-      <article-item v-for="item in items" :key="item.id" :item="item"></article-item>
-    </div>
-    <div class="grayInfo" v-if="!items.length">
-      Your Reading List is empty :(
+    <div>
+      <h2 class="articleList__sectionHeadline">Reading List</h2>
+      <div v-bind:class="['articleList__listSection', { 'articleList__listSection--gridView' : layout == 'grid' }]">
+        <article-item v-for="item in items" :key="item.id" :item="item"></article-item>
+      </div>
+      <div class="grayInfo" v-if="!items.length">
+        Your Reading List is empty :(
+      </div>
     </div>
   </div>
 </template>
