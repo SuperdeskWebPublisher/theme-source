@@ -1,3 +1,4 @@
+{% cache 'topNews' { time: 200 } %}
 {% set response = [] %} 
 {% set rend = null %} 
 {% gimmelist item from contentListItems with { contentListName: "topNews" } %}
@@ -15,3 +16,4 @@
   {% set response =  response|merge([{id: item.content.id, title: item.content.title, url: url(item.content), date: item.content.publishedAt.date, lead: item.content.lead|striptags|truncate(120,true), source: item.content.source, image: url(rend)}])  %}
 {% endgimmelist %}
 {{ response|json_encode()|raw }}
+{% endcache %}

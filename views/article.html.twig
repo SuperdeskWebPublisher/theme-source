@@ -15,7 +15,7 @@
   <meta name="keywords" content="Superdesk, Sourcefabric, open source, media, journalism">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel='stylesheet' href='/public/dist/article.css' type='text/css' media='all' />
+  <link rel='stylesheet' href='/public/dist/style.css' type='text/css' media='all' />
   <link rel="preload" href="/public/dist/all.js" as="script">
   <link rel="manifest" href="/manifest.json">
 
@@ -28,147 +28,48 @@
   <link rel="amphtml" href="{{ url(gimme.article)|amp }}">
 
 </head>
-<body>
+<body class="article">
+  <aside class="article__side">
+    <a href="/#/" class="article__logo"><img src="/public/img/logo-dark.svg"></a>
+    <a class="button button--back cursorPointer">Back</a>
+  </aside>
+  <article class="article__wrapper">
+    {% set big = '' %}
+    {% set small = '' %}
 
-{% set big = '' %}
-{% set small = '' %}
+    {% if gimme.article.featureMedia %}
 
-{% if gimme.article.featureMedia %}
-
-{% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '1100x500' } %}
-{% set big = path(rendition) %}
-{% endgimme %}
-{% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '600x360' } %}
-{% set small = path(rendition) %}
-{% endgimme %}
-{% endif %}
+    {% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '900x490' } %}
+    {% set big = path(rendition) %}
+    {% endgimme %}
+    {% gimme rendition with { 'media': gimme.article.featureMedia, 'name': '600x360' } %}
+    {% set small = path(rendition) %}
+    {% endgimme %}
+    {% endif %}
 
 
-{% if small is not empty %}
-<picture class="article__image">
-  <!-- <source srcset="{{big}}" media="(min-width: 650px) " /> -->
-  <img src="http://lorempixel.com/1900/600/" alt="" />
-</picture>
-{% endif %}
-
-<div class="topBar visible-xs-block">
-  <a href="/#/" class="topBar__logo visible-xs-block"><img src="{{ asset('theme/img/logo_small.svg') }}"></a>
-
-  <div class="bt-menu-trigger" v-on:click="toggleSidebar()">
-    <img src="{{ asset('theme/img/hamburger_menu.png') }}">
-  </div>
-</div>
-
-<main class="container-fluid">
-  <div class="row">
-    <div class="sidebar">
-      <a href="/#/" class="sidebar__logo hidden-xs"><img src="{{ asset('theme/img/logo.svg') }}"></a>
-      
-     <nav class="sidebar__nav"><ul><li><a href="/#/Politics" class="">Politics</a></li><li><a href="/#/Business" class="">Business</a></li><li><a href="/#/Health" class="">Health</a></li><li><a href="/#/Sport" class="">Sport</a></li></ul></nav>
-    </div>
-
-    <div class="contentPush col-md-12 col-sm-12 col-xs-12">
-      <div class="row">
-        <article class="article col-lg-8 col-xs-12">
-          <div class="article__wrapper">
-            <header class="article__header">
-              <h1>{{ gimme.article.title }}</h1>
-              <time datetime="{{ gimme.article.publishedAt|date("c") }}" class="">{{ gimme.article.publishedAt|date("d F Y") }}</time>
-            </header>
-            <div class="article__body">
-              {{ gimme.article.body|raw }}
-            </div>
-
-            <footer class="articleFooter clearfix">
-              {% if gimme.article.metadata.byline %}
-              <strong class="articleFooter__left">by {{ gimme.article.metadata.byline }}</strong>
-              {% endif %}
-
-              <div class="articleFooter__share clearfix">
-                <ul class="rrssb-buttons">
-                  <li class="rrssb-facebook small">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{url(gimme.article)}}" class="popup">
-                      <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"/></svg></span>
-                      <span class="rrssb-text">facebook</span>
-                    </a>
-                  </li>
-                  <li class="rrssb-twitter small">
-                    <!-- Replace href with your Meta and URL information  -->
-                    <a href="https://twitter.com/intent/tweet?text={{gimme.article.title}}%20{{url(gimme.article)}}"
-                    class="popup">
-                    <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62a15.093 15.093 0 0 1-8.86-2.32c2.702.18 5.375-.648 7.507-2.32a5.417 5.417 0 0 1-4.49-3.64c.802.13 1.62.077 2.4-.154a5.416 5.416 0 0 1-4.412-5.11 5.43 5.43 0 0 0 2.168.387A5.416 5.416 0 0 1 2.89 4.498a15.09 15.09 0 0 0 10.913 5.573 5.185 5.185 0 0 1 3.434-6.48 5.18 5.18 0 0 1 5.546 1.682 9.076 9.076 0 0 0 3.33-1.317 5.038 5.038 0 0 1-2.4 2.942 9.068 9.068 0 0 0 3.02-.85 5.05 5.05 0 0 1-2.48 2.71z"/></svg></span>
-                    <span class="rrssb-text">twitter</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </footer>
-
-          <div id="disqus_thread"></div>
-          <script>
-            (function() {
-              var d = document, s = d.createElement('script');
-              s.src = '//superdeskdailynews.disqus.com/embed.js';
-              s.setAttribute('data-timestamp', +new Date());
-              (d.head || d.body).appendChild(s);
-            })();
-          </script>
-          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </div>
-      </article>
-      <div class="boxSidebar col-lg-4 visible-lg">
-        <div class="boxSidebar__item boxSidebar__mostRead">
-              <h2 class="boxSidebar__item__headline">Most read</h2>
-              <ul>
-                <li class="boxSidebar__mostReadItem"><a href="#">Automated Client-server Emulation</a></li>
-                <li class="boxSidebar__mostReadItem"><a href="#">Switchable Demand-driven Processimprovement</a></li>
-                <li class="boxSidebar__mostReadItem"><a href="#">Automated Client-server Emulation</a></li>
-                <li class="boxSidebar__mostReadItem"><a href="#">Phased Analyzing Conglomeration</a></li>
-                <li class="boxSidebar__mostReadItem"><a href="#">Managed Dedicated Strategy</a></li>
-              </ul>
-            </div>
-
-            <div class="boxSidebar__item boxSidebar__editorsPicks">
-              <h2 class="boxSidebar__item__headline">Editors' picks</h2>
-              <ul>
-                <li class="boxSidebar__editorsPicksItem">
-                  <a href="#"><span class="boxSidebar__editorsPicks__headline">Automated Client-server Emulation</span> 
-                  <span class="boxSidebar__editorsPicks__info">The Guardian</span> 
-                  <span class="boxSidebar__editorsPicks__info">40 min ago</span></a>
-                </li>
-
-                <li class="boxSidebar__editorsPicksItem">
-                  <a href="#"><span class="boxSidebar__editorsPicks__headline">Switchable Demand-driven Processimprovement</span> 
-                  <span class="boxSidebar__editorsPicks__info">The Guardian</span> 
-                  <span class="boxSidebar__editorsPicks__info">40 min ago</span></a>
-                </li>
-
-                <li class="boxSidebar__editorsPicksItem">
-                  <a href="#"><span class="boxSidebar__editorsPicks__headline">Automated Client-server Emulation</span> 
-                  <span class="boxSidebar__editorsPicks__info">The Guardian</span> 
-                  <span class="boxSidebar__editorsPicks__info">40 min ago</span></a>
-                </li>
-
-                <li class="boxSidebar__editorsPicksItem">
-                  <a href="#"><span class="boxSidebar__editorsPicks__headline">Phased Analyzing Conglomeration</span> 
-                  <span class="boxSidebar__editorsPicks__info">The Guardian</span> 
-                  <span class="boxSidebar__editorsPicks__info">40 min ago</span></a>
-                </li>
-
-                <li class="boxSidebar__editorsPicksItem">
-                  <a href="#"><span class="boxSidebar__editorsPicks__headline">Managed Dedicated Strategy</span> 
-                  <span class="boxSidebar__editorsPicks__info">The Guardian</span> 
-                  <span class="boxSidebar__editorsPicks__info">40 min ago</span></a>
-                </li>
-                
-              </ul>
-            </div>
+    {% if small is not empty %}
+    <picture class="article__image">
+      <source srcset="{{big}}" media="(min-width: 650px) " />
+      <img src="{{small}}" alt="" />
+    </picture>
+    {% endif %}
+    <header class="article__header">
+      <h1>{{ gimme.article.title }}</h1>
+      <div class="articleList__metadata">
+      {% if gimme.article.source %}
+        <span class="articleList__metadata__item">{{gimme.article.source}}</span>
+      {% endif %}
+        <time class="articleList__metadata__item" datetime="{{ gimme.article.publishedAt|date("c") }}" class="">{{ gimme.article.publishedAt|date("d F Y") }}</time>
       </div>
+  
+    </header>
+    <div class="article__body">
+      {{ gimme.article.body|raw }}
     </div>
-  </div>
-</div>
-</main>
-</div>
+  </article>
+   <aside class="article__side visible-lg">
+  </aside>
 
 <script src="/public/dist/all.js" ></script>
 </body>

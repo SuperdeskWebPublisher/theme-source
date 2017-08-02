@@ -5,12 +5,12 @@
   text-transform: uppercase
   padding: 0 15px
   border-radius: 2px
-  background: #0080FF
+  background-color: #0080FF
   &[disabled]
     opacity: .3
   &:hover
     color: $colorWhite
-    background: #1A8CFF
+    background-color: #1A8CFF
     text-decoration: none
   @media (min-width: 1480px)
     font-size: 1.6rem
@@ -32,4 +32,12 @@
     +sm
       margin-top: 0px
       opacity: 1
+  &--back
+    display: inline-block
+    font-weight: 600
+    background: #0080FF url(../img/back_arrow.svg) .8em center no-repeat
+    background-size: .6em
+    padding-left: 2em
+    &:hover
+      background-position: .6em center
   

@@ -1,0 +1,44 @@
+.article
+  display: flex
+  min-height: 100vh
+  flex-wrap: wrap
+  +sm
+    border: 2vw solid #222
+  +md
+    flex-wrap: nowrap
+  +lg
+    border-width: 3vw
+  &__side
+    flex-grow: 1
+    padding: 3vw
+    +md
+      max-width: 25vw
+      min-width: 20vw
+  &__wrapper
+    flex-grow: 2
+    padding: 3vw
+    +lg
+      max-width: 50vw
+  &__logo
+    display: block
+    margin-bottom: 2rem 
+    img
+      max-width: 150px
+      +md
+        width: 80%
+      +lg
+        width: 50%
+  &__image
+    display: block
+    margin: 0 -3vw
+    +md
+      margin: 0 -1vw
+    +lg
+      margin: 0
+  &__header
+    h1
+      font-weight: 600
+      margin-bottom: 0
+    .articleList__metadata
+      margin: 20px 0
+  

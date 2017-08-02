@@ -1,1 +1,3 @@
+{% cache 'menu' { time: 900 } %}
 {{ knp_menu_render('mainNavigation',{'template':'api/knp_menu.html.twig'}) }}
+{% endcache %}
