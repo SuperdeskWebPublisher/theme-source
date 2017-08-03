@@ -71,6 +71,12 @@ export default {
   }
 }
 
+@media screen and (min-width: 1800px) {
+  .modal-container {
+    max-width: 40%;
+  }
+}
+
 .modal-header h3 {
   margin-top: 0;
 }
