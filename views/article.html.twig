@@ -61,16 +61,13 @@
 </head>
 <body class="article">
   <header class="article__topnav hidden-lg">
-    <a class="button button--back cursorPointer">Back</a>
+    <a href="/" class="button button--back cursorPointer">Back</a>
   </header>
   <aside class="article__sidenav visible-lg">
     <a href="/#/" class="article__logo"><img src="/public/img/logo-dark.svg"></a>
-    <a class="button button--back cursorPointer">Back</a>
+    <a href="/" class="button button--back cursorPointer">Back</a>
   </aside>
   <article class="article__wrapper">
-    
-
-
     {% if small is not empty %}
     <picture class="article__image">
       <source srcset="{{big}}" media="(min-width: 650px) " />
@@ -81,7 +78,7 @@
       <h1>{{ gimme.article.title }}</h1>
       <div class="articleList__metadata">
       {% for source in gimme.article.sources %}
-        <span class="articleList__metadata__item">{{source}}</span>
+        <span class="articleList__metadata__item">{{source.name}}</span>
       {% endfor %}
         <time class="articleList__metadata__item" datetime="{{ gimme.article.publishedAt|date("c") }}" class="">{{ gimme.article.publishedAt|date("d F Y") }}</time>
       </div>
@@ -96,7 +93,7 @@
     <h2 class="articleList__sectionHeadline">More from {{gimme.article.route.name}}</h2><div class="articleList__listSection articleList__listSection--gridView">
       {% set counter = 0 %}
       {% gimmelist article from articles|limit(3)|order('publishedAt','desc') %}
-        {% if (article.id != gimme.article.id) and (counter < 3) %}
+        {% if (article.id != gimme.article.id) and (counter < 2) %}
           {% set counter = counter + 1 %}
           {% set rend = '' %}
           {% if article.featureMedia %}
@@ -122,7 +119,7 @@
                 <p class="articleList__text">{{article.lead|striptags|truncate(120,true)}}</p>
                 <div class="articleList__metadata">
                   {% for source in article.sources %}
-                    <span class="articleList__metadata__item">{{source}}</span>
+                    <span class="articleList__metadata__item">{{source.name}}</span>
                   {% endfor %}
                   <span class="articleList__metadata__item">{{ article.publishedAt|date("d F Y") }}</span>
                 </div>

@@ -1,7 +1,15 @@
 {% cache 'editorsPicks' { time: 600 } %}
 {% set response = [] %} 
 {% gimmelist item from contentListItems with { contentListName: "editorsPicks" } %}
-    {% set response =  response|merge([{title: item.content.title, url: url(item.content), source: item.content.source, date: item.content.publishedAt.date}])  %} 
+  {% set sources = '' %}
+  {% for source in gimme.article.sources %}
+    {% if sources %}
+     {% set sources = sources ~ ', ' ~ source.name %}
+    {% else %}
+      {% set sources = source.name %}
+    {% endif %}
+  {% endfor %}
+    {% set response =  response|merge([{title: item.content.title, url: url(item.content), source: sources, date: item.content.publishedAt.date}])  %} 
 {% endgimmelist %}
 {{ response|json_encode()|raw }}
 {% endcache %}

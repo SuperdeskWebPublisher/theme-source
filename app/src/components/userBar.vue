@@ -70,8 +70,8 @@
   <div class="sidebar__user" v-if="!user.id">
     <span class="sidebar__user__info sidebar__user__info--login">
       <img class="sidebar__user__avatar" src="../assets/user2.png">
-      <span class="sidebar__user__name cursorPointer hoverUnderline" v-on:click="setLoginModalOpen(true)">Login</span>
-      <span class="sidebar__user__type cursorPointer hoverUnderline" v-on:click="registerModalOpen=true">Register</span>
+      <span class="sidebar__user__name cursorPointer hoverUnderline" @click="setLoginModalOpen(true)">Login</span>
+      <span class="sidebar__user__type cursorPointer hoverUnderline" @click="registerModalOpen=true">Register</span>
     </span>
   </div>
 </div>
@@ -125,7 +125,8 @@ export default {
     ...mapActions([
       'saveAuthToken',
       'saveUser',
-      'loadConfig'
+      'loadConfig',
+      'loadSources'
     ]),
     register: function () {
       this.$validator.validateAll('registerForm').then(result => {
@@ -157,6 +158,7 @@ export default {
         _self.saveAuthToken(response.data.token.api_key)
         _self.saveUser(response.data.user)
         _self.loadConfig()
+        _self.loadSources({auth_token: response.data.token.api_key})
       })
       .catch(function (error) {
         console.log(error)

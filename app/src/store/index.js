@@ -16,24 +16,7 @@ const store = new Vuex.Store({
     user: {id: null},
     auth_token: '',
     readingList: [],
-    sources: [
-      {
-        title: 'Fox',
-        switch: 1
-      },
-      {
-        title: 'CNN',
-        switch: 1
-      },
-      {
-        title: 'Washington Post',
-        switch: 1
-      },
-      {
-        title: 'The Guardian',
-        switch: 1
-      }
-    ]
+    sources: []
   },
   getters: {
     getLayout: state => {
@@ -114,6 +97,24 @@ const store = new Vuex.Store({
           throw error
         })
     },
+    loadSources: (context, payload) => {
+      return axios.get(variables.host + '/api/' + variables.api_ver + '/content/sources/?limit=9999',
+        { 'headers': { 'Authorization': 'Basic ' + payload.auth_token } })
+        .then((response) => {
+          let sources = []
+          _.each(response.data._embedded._items, function (item) {
+            if (!item.hasOwnProperty('switch')) {
+              item.switch = 1
+            }
+            sources.push(item)
+          })
+          context.commit('setSources', sources)
+          return
+        })
+        .catch((error) => {
+          throw error
+        })
+    },
     loadUser: (context, payload) => {
       return axios.get(variables.host + '/api/' + variables.api_ver + '/users/profile/' + payload.user_id,
         { 'headers': { 'Authorization': 'Basic ' + payload.auth_token } })
@@ -161,9 +162,9 @@ const store = new Vuex.Store({
         let oriSources = JSON.parse(JSON.stringify(context.getters.getSources))
         merged = []
         if (oriSources.length >= config.sources.length) {
-          merged = _.unionBy(config.sources, oriSources, 'title')
+          merged = _.unionBy(config.sources, oriSources, 'id')
         } else {
-          merged = _.intersectionBy(config.sources, oriSources, 'title')
+          merged = _.intersectionBy(config.sources, oriSources, 'id')
         }
         context.commit('setSources', merged)
 

@@ -1,8 +1,8 @@
 <template>
   <div class="darkTabs">
     <ul class="darkTabs__nav">
-      <li v-bind:class="{ 'active' : activeTab=='sections' }" @click="activeTab='sections'">Sections</li>
-      <li v-bind:class="{ 'active' : activeTab=='sources' }" @click="activeTab='sources'">Sources</li>
+      <li :class="{ 'active' : activeTab=='sections' }" @click="activeTab='sections'">Sections</li>
+      <li :class="{ 'active' : activeTab=='sources' }" @click="activeTab='sources'">Sources</li>
     </ul>
     <div v-if="activeTab=='sections'">
       <table class="sectionsTable">
@@ -16,8 +16,8 @@
         </tr>
       </table>
       <div class="darkTabs__buttons">
-        <button v-on:click="save()" class="button button--small" v-bind:disabled="busy">Save</button>
-        <button v-on:click="$emit('close')" class="button button--grey button--small">Cancel</button>
+        <button @click="save()" class="button button--small" :disabled="busy">Save</button>
+        <button @click="$emit('close')" class="button button--grey button--small">Cancel</button>
       </div>
     </div>
     <div v-if="activeTab=='sources'">
@@ -27,13 +27,13 @@
             <slider ref="slider" v-model="item.switch" :value="item.switch" :min="0" :max="1" tooltip="none" :real-time="true" :height="2" :dot-size="12"></slider>
           </td>
           <td class="sectionsTable__title">
-            {{item.title}}
+            {{item.name}}
           </td>
         </tr>
       </table>
       <div class="darkTabs__buttons">
-        <button v-on:click="save()" class="button button--small" v-bind:disabled="busy">Save</button>
-        <button v-on:click="$emit('close')" class="button button--grey button--small">Cancel</button>
+        <button @click="save()" class="button button--small" :disabled="busy">Save</button>
+        <button @click="$emit('close')" class="button button--grey button--small">Cancel</button>
       </div>
     </div>
   </div>

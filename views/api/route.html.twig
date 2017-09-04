@@ -17,7 +17,15 @@
       {% endgimme %}
     {% endgimmelist %}
   {% endif %}
-  {% set response =  response|merge([{id: article.id, title: article.title, url: url(article), date: article.publishedAt.date, lead: article.lead|striptags|truncate(120,true), source: article.source, image: url(rend)}])  %}
+  {% set sources = '' %}
+  {% for source in gimme.article.sources %}
+    {% if sources %}
+     {% set sources = sources ~ ', ' ~ source.name %}
+    {% else %}
+      {% set sources = source.name %}
+    {% endif %}
+  {% endfor %}
+  {% set response =  response|merge([{id: article.id, title: article.title, url: url(article), date: article.publishedAt.date, lead: article.lead|striptags|truncate(120,true), source: sources, image: url(rend)}])  %}
 {% endgimmelist %}
 {{ response|json_encode()|raw }}
 {% endcache %}

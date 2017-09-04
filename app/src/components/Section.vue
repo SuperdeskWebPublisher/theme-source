@@ -2,11 +2,14 @@
   <div class="articleList col-lg-8">
     <div>
       <h2 class="articleList__sectionHeadline">{{sectionName}}</h2>
-      <div v-bind:class="['articleList__listSection', { 'articleList__listSection--gridView' : layout == 'grid' }]" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+      <div :class="['articleList__listSection', { 'articleList__listSection--gridView' : layout == 'grid' }]" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
         <article-item v-for="item in items" :key="item.id" :item="item"></article-item>
       </div>
-      <div class="grayInfo" v-if="!items.length && !busy">
+      <div class="grayInfo" v-if="!items.length && !busy && !showOfflineMessage">
         No Articles yet :(
+      </div>
+      <div class="grayInfo" v-if="showOfflineMessage">
+        You are offline :(
       </div>
       <spinner v-if="busy"></spinner>
     </div>
@@ -33,22 +36,26 @@ export default {
       sectionName: this.name,
       page: 1,
       end: false,
-      busy: false
+      busy: false,
+      showOfflineMessage: false
     }
   },
   computed: mapGetters({
-    layout: 'getLayout'
+    layout: 'getLayout',
+    isOnline: 'getIsOnline'
   }),
   beforeRouteUpdate: function (to, from, next) {
     this.sectionName = to.params.name
     this.reset()
     this.getItems()
+    localStorage.setItem('lastPage', '/#/' + this.sectionName)
     next()
   },
   beforeMount: function () {
     this.sectionName = this.name
     this.reset()
     this.getItems()
+    sessionStorage.setItem('lastPage', '/#/' + this.sectionName)
   },
   methods: {
     reset: function () {
@@ -56,8 +63,10 @@ export default {
       this.page = 1
       this.end = false
       this.busy = false
+      this.showOfflineMessage = false
     },
     getItems: function () {
+      let _self = this
       this.busy = true
       axios.get(variables.host + '/contentapi.json?type=route&limit=12&route=/' + this.sectionName + '&page=' + this.page)
         .then((response) => {
@@ -66,6 +75,14 @@ export default {
           this.busy = false
           if (!response.data.length) {
             this.end = true
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+          _self.busy = false
+          _self.end = true
+          if (!_self.isOnline) {
+            _self.showOfflineMessage = true
           }
         })
     },

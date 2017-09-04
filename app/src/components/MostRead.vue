@@ -3,7 +3,7 @@
     <h2 class="boxSidebar__item__headline">Most read</h2>
     <ul>
       <li v-for="item in items" class="boxSidebar__mostReadItem">
-        <a v-bind:href="item.url">
+        <a :href="item.url">
           {{ item.title }}
         </a>
       </li>

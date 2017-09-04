@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="articleList__sectionHeadline">Top news</h2>
-    <div v-bind:class="['articleList__listSection', { 'articleList__listSection--gridView' : layout == 'grid' }]">
+    <div :class="['articleList__listSection', { 'articleList__listSection--gridView' : layout == 'grid' }]">
       <article-item v-for="item in items" :key="item.id" :item="item"></article-item>
     </div>
     <spinner v-if="busy"></spinner>

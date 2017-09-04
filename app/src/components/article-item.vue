@@ -1,8 +1,8 @@
 <template>
-<article  v-bind:class="['articleList__item', { 'articleList__item--noImage' : !item.image }]">
-  <a v-bind:href="item.url">
+<article  :class="['articleList__item', { 'articleList__item--noImage' : !item.image }]">
+  <a :href="item.url">
     <figure class="articleList__image" v-if="item.image && item.image.length">
-      <img v-bind:src="item.image">
+      <img :src="item.image">
     </figure>
     <div class="articleList__info">
       <h3 class="articleList__headline">{{item.title}}</h3>
@@ -12,8 +12,8 @@
         <span class="articleList__metadata__item" v-if="item.source">{{item.source}}</span>
         <span class="articleList__metadata__item">{{item.date | relativeDate}}</span>
         <span 
-          v-bind:class="['articleList__metadata__item articleList__metadata__item--readLater', { 'articleList__metadata__item--readLater--active' : isInReadingList, 'articleList__metadata__item--readLater--offline' : !isOnline }]"
-          v-on:click.stop.prevent="toggleReadingList()"
+          :class="['articleList__metadata__item articleList__metadata__item--readLater', { 'articleList__metadata__item--readLater--active' : isInReadingList, 'articleList__metadata__item--readLater--offline' : !isOnline }]"
+          @click.stop.prevent="toggleReadingList()"
           v-tooltip.top-center="readingListTooltip">
           Read later
         </span>

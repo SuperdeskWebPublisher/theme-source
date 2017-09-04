@@ -4,14 +4,14 @@
     <div class="topBar visible-xs-block">
       <a href="/#/" class="topBar__logo visible-xs-block"><img src="./assets/logo_small.svg"></a>
 
-      <div class="bt-menu-trigger" v-on:click="toggleSidebar()">
+      <div class="bt-menu-trigger" @click="toggleSidebar()">
         <img src="./assets/hamburger_menu.png">
       </div>
     </div>
 
     <main class="container-fluid">
       <div class="row">
-        <div v-bind:class="['sidebar', { 'open' : sidebarOpen }]">
+        <div :class="['sidebar', { 'open' : sidebarOpen }]">
           <a href="/#/" class="sidebar__logo hidden-xs"><img src="./assets/logo.svg"></a>
           <span @click="personalize" class="button button--personalize cursorPointer">Personalize</span>
           <personalize v-if="personalizeOpen" @close="personalizeOpen=false"></personalize>
@@ -30,7 +30,7 @@
                 </select>
               </div>
               <div class="select-style">
-                <select class="dropdown" v-model="layoutLocal" v-on:change="pickLayout">
+                <select class="dropdown" v-model="layoutLocal" @change="pickLayout">
                   <option value="list">List view</option>
                   <option value="grid">Grid view</option>
                 </select>
@@ -83,7 +83,9 @@ export default {
       let userId = localStorage.getItem('user_id')
       if (authToken) {
         _self.setAuthToken(authToken)
-        _self.loadUser({auth_token: authToken, user_id: userId}).then(_self.loadConfig())
+        _self.loadUser({auth_token: authToken, user_id: userId})
+          .then(_self.loadSources({auth_token: authToken}))
+          .then(_self.loadConfig())
       }
     })
 
@@ -105,7 +107,8 @@ export default {
       'loadUser',
       'loadMenuItems',
       'loadConfig',
-      'saveReadingList'
+      'saveReadingList',
+      'loadSources'
     ]),
     pickLayout: function () {
       this.setLayout(this.layoutLocal)

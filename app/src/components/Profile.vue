@@ -33,19 +33,19 @@
                 <label for="password">Change Password</label>
                 <input name="password" v-model="user_profile.plainPassword.first" 
                   v-validate data-vv-rules="min:5|confirmed:pw_confirm_profile" type="password"
-                  v-bind:class="['form-control', {'has-error': errors.has('password')}]">
+                  :class="['form-control', {'has-error': errors.has('password')}]">
                 <p class="text-danger help-block" v-if="errors.has('password')">{{ errors.first('password') }}</p>
               </div>
               <div class="form__item">
                 <label for="pw_confirm_profile">Confirm password</label>
                 <input name="pw_confirm_profile" v-model="user_profile.plainPassword.second" 
-                  type="password" v-bind:class="['form-control', {'has-error': errors.has('password')}]">
+                  type="password" :class="['form-control', {'has-error': errors.has('password')}]">
               </div>
               <div class="form__item">
                 <label for="about">About</label>
                 <textarea class="form-control" rows="4" v-model="user_profile.about"></textarea>
               </div>
-              <button type="submit" class="button btn btn-default" v-bind:disabled="busy || !isOnline">Save</button>
+              <button type="submit" class="button btn btn-default" :disabled="busy || !isOnline">Save</button>
             </form>
           </div>
         </article>

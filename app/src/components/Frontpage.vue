@@ -19,6 +19,7 @@ export default {
   },
   beforeMount: function () {
     window.scrollTo(0, 0)
+    sessionStorage.setItem('lastPage', '/')
   },
   computed: {
     ...mapGetters({
