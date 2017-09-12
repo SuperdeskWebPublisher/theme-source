@@ -1,10 +1,11 @@
 {% cache 'route_'~app.request.all()|join('_')~'' { time: 600 } %}
 {% set route =  app.request.get("route") %}
+{% set noSources =  app.request.get("nosources") %}
 {% set response = [] %} 
 {% set itemsPerPage = app.request.get('limit', 1) %}
 {% set currentPage = app.request.get('page', 1) %}
 {% set start = (itemsPerPage * currentPage) - itemsPerPage %}
-{% gimmelist article from articles|start(start)|limit(itemsPerPage)|order('publishedAt','desc') with {'route': route} %}
+{% gimmelist article from articles|start(start)|limit(itemsPerPage)|order('publishedAt','desc') with {'route': route} without {source: noSources} %}
   {% set rend = '' %}
   {% if article.featureMedia %}
     {% gimme rendition with { 'media': article.featureMedia, 'name': '300x220' } %}

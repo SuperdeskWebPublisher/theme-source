@@ -16,7 +16,8 @@ const store = new Vuex.Store({
     user: {id: null},
     auth_token: '',
     readingList: [],
-    sources: []
+    sources: [],
+    inactiveSources: []
   },
   getters: {
     getLayout: state => {
@@ -40,6 +41,9 @@ const store = new Vuex.Store({
     getSources: state => {
       return state.sources
     },
+    getInactiveSources: state => {
+      return state.inactiveSources
+    },
     getReadingList: state => {
       return state.readingList
     },
@@ -59,6 +63,9 @@ const store = new Vuex.Store({
     },
     setSources: (state, payload) => {
       state.sources = payload
+    },
+    setInactiveSources: (state, payload) => {
+      state.inactiveSources = payload
     },
     setLoginModalOpen: (state, payload) => {
       state.loginModalOpen = payload
@@ -109,6 +116,7 @@ const store = new Vuex.Store({
             sources.push(item)
           })
           context.commit('setSources', sources)
+          context.commit('setInactiveSources', _.filter(sources, {switch: 0}))
           return
         })
         .catch((error) => {
@@ -167,6 +175,7 @@ const store = new Vuex.Store({
           merged = _.intersectionBy(config.sources, oriSources, 'id')
         }
         context.commit('setSources', merged)
+        context.commit('setInactiveSources', _.filter(merged, {switch: 0}))
 
         // ----------- readingList --------
         let readingList = JSON.parse(response.data.user_favourite_articles.value)
@@ -187,6 +196,7 @@ const store = new Vuex.Store({
       context.dispatch('updateMenuWithFilters', payload.sections)
       context.commit('setFrontpageSections', payload.sections)
       context.commit('setSources', payload.sources)
+      context.commit('setInactiveSources', _.filter(payload.sources, {switch: 0}))
       axios({
         method: 'patch',
         url: variables.host + '/api/' + variables.api_ver + '/settings/',

@@ -10,6 +10,7 @@
 
 <script>
 import axios from 'axios'
+import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import articleItem from '@/components/article-item.vue'
 import spinner from '@/components/spinner.vue'
@@ -35,15 +36,20 @@ export default {
   computed: {
     ...mapGetters({
       layout: 'getLayout',
-      sources: 'getSources'
+      inactiveSources: 'getInactiveSources'
     })
   },
   methods: {
     getItems: function () {
       this.busy = true
+      let noSources = ''
+
+      _.forEach(this.inactiveSources, function (source) {
+        noSources += '&nosources[]=' + source.name
+      })
       this.previousScore = this.section.score
       let limit = this.section.score === 10 ? 6 : 4
-      axios.get(variables.host + '/contentapi.json?type=route&limit=' + limit + '&route=' + this.section.url)
+      axios.get(variables.host + '/contentapi.json?type=route&limit=' + limit + '&route=' + this.section.url + noSources)
         .then((response) => {
           this.items = response.data
           this.busy = false
@@ -56,7 +62,7 @@ export default {
         this.getItems()
       }
     },
-    sources: function (val) {
+    inactiveSources: function (val) {
       this.getItems()
     }
   }
