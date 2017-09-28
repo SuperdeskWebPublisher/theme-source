@@ -23,13 +23,6 @@
           <div class="row">
             <div class="col-xs-12 dropdown--wrap">
               <div class="select-style">
-                <select class="dropdown">
-                  <option value="world">World edition</option>
-                  <option value="uk">UK edition</option>
-                  <option value="us">US edition</option>
-                </select>
-              </div>
-              <div class="select-style">
                 <select class="dropdown" v-model="layoutLocal" @change="pickLayout">
                   <option value="list">List view</option>
                   <option value="grid">Grid view</option>

@@ -1,4 +1,4 @@
 module.exports = {
-  host: 'http://sp-source.s-lab.sourcefabric.org/app_dev.php',
+  host: '',
   api_ver: 'v1'
 }
