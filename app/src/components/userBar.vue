@@ -53,7 +53,7 @@
       </div>
     </form>
   </div>
-  <button slot="footer" v-on:click="register" class="button" v-bind:disabled="busy">Register</button>
+  <button slot="footer" v-on:click="register" class="button" v-bind:disabled="busy" v-show="registerStep=='register'">Register</button>
 </modal>
   <div class="sidebar__user" v-if="user.id">
     <span class="sidebar__user__info">
