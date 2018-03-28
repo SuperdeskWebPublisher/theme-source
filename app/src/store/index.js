@@ -179,6 +179,9 @@ const store = new Vuex.Store({
 
         // ----------- readingList --------
         let readingList = JSON.parse(response.data.user_favourite_articles.value)
+        if (!Array.isArray(readingList)) {
+          readingList = []
+        }
         context.commit('setReadingList', readingList)
       })
       .catch((error) => {
