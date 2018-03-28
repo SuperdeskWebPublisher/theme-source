@@ -9,5 +9,92 @@
         "homepage": "https://www.sourcefabric.org",
         "role": "Organization"
     }
-    ]
+    ],
+
+    "generatedData": {
+        "routes": [
+            {
+                "name": "Business",
+                "slug": "business",
+                "type": "collection",
+                "numberOfArticles": 4
+            },
+            {
+                "name": "Opinion",
+                "slug": "opinion",
+                "type": "collection",
+                "numberOfArticles": 4
+            },
+            {
+                "name": "Travel",
+                "slug": "travel",
+                "type": "collection",
+                "numberOfArticles": 16
+            },
+            {
+                "name": "Sports",
+                "slug": "sports",
+                "type": "collection",
+                "numberOfArticles": 4
+            },
+            {
+                "name": "contentapi.json",
+                "slug": "contentapi.json",
+                "type": "collection",
+                "templateName": "api.html.twig",
+                "articlesTemplateName": "api.html.twig"
+            }
+        ],
+        "menus": [
+            {
+                "name": "mainNavigation",
+                "label": "Main Navigation",
+                "children": [
+                    {
+                        "name": "business",
+                        "label": "Business",
+                        "route": "Business"
+                    },
+                    {
+                        "name": "opinion",
+                        "label": "Opinion",
+                        "route": "Opinion"
+                    },
+                    {
+                        "name": "sports",
+                        "label": "Sports",
+                        "route": "Sports"
+                    },
+                    {
+                        "name": "travel",
+                        "label": "Travel",
+                        "route": "Travel"
+                    }
+                ]
+            }
+        ],
+        "contentLists": [
+            {
+                "name": "topNews",
+                "description": null,
+                "type": "manual",
+                "cacheLifeTime": 0,
+                "limit": null
+            },
+            {
+                "name": "editorsPicks",
+                "description": "",
+                "type": "manual",
+                "cacheLifeTime": 0,
+                "limit": null
+            },
+            {
+                "name": "mostRead",
+                "description": "",
+                "type": "automatic",
+                "cacheLifeTime": 0,
+                "limit": 8
+            }
+        ]
+    }
 }
