@@ -1,4 +1,4 @@
-{#% cache 'article' {gen: gimme.article} %#}
+{% cache 'article' {gen: gimme.article} %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +29,7 @@
     {% endgimme %}
   {% endif %}
 
-  
+
   {% if bigURL %}
       <meta property="og:image" content="{{bigURL}}" />
       <meta property="og:image:height" content="900" />
@@ -82,7 +82,7 @@
       {% endfor %}
         <time class="articleList__metadata__item" datetime="{{ gimme.article.publishedAt|date("c") }}" class="">{{ gimme.article.publishedAt|date("d F Y") }}</time>
       </div>
-  
+
     </header>
     <div class="article__body">
       {{ gimme.article.body|raw }}
@@ -134,4 +134,4 @@
 </body>
 </html>
 
-{#% endcache %#}
+{% endcache %}

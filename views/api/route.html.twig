@@ -1,7 +1,7 @@
-{% cache 'route_'~app.request.all()|join('_')~'' { time: 600 } %}
+{% cache 'route_'~app.request.query.all()|join('_')~'' { time: 600 } %}
 {% set route =  app.request.get("route") %}
 {% set noSources =  app.request.get("nosources") %}
-{% set response = [] %} 
+{% set response = [] %}
 {% set itemsPerPage = app.request.get('limit', 1) %}
 {% set currentPage = app.request.get('page', 1) %}
 {% set start = (itemsPerPage * currentPage) - itemsPerPage %}
